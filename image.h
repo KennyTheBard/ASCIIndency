@@ -12,8 +12,13 @@ class image {
 public:
     image(int height, int width, int num_channels, size_t channel_size);
     ~image();
+
     char* get_pixel(int line, int col);
     void set_pixel(int line, int col, char* px);
+
+    char* get_pixels(int line, int col, int num_px);
+    void set_pixels(int line, int col, char* pxs, int num_px);
+
     int get_height();
     int get_width();
     int get_num_channels();

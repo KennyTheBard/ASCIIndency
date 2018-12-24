@@ -21,23 +21,27 @@ image::~image() {
 }
 
 char* image::get_pixel(int line, int col) {
-    char* ret = (char *) calloc (get_pixel_size(), sizeof(char));
-
-    int start = (line * width + col) * get_pixel_size();
-    int end = (line * width + col) * get_pixel_size() + get_pixel_size();
-    for (int i = start; i < end; i++)
-        ret[i - start] = bitmap[i];
-
-    return ret;
+    return get_pixels(line, col, 1);
 }
 
 void image::set_pixel(int line, int col, char* px) {
     // TODO : choose a safer alternative for pointer
+    set_pixels(line, col, px, 1);
+}
 
+char* image::get_pixels(int line, int col, int num_px) {
     int start = (line * width + col) * get_pixel_size();
-    int end = (line * width + col) * get_pixel_size() + get_pixel_size();
-    for (int i = start; i < end; i++)
-        bitmap[i] = px[i - start];
+
+    char* ret = (char *) calloc (num_px * get_pixel_size(), sizeof(char));
+    memcpy(ret, bitmap + start, num_px);
+
+    return ret;
+}
+
+void image::set_pixels(int line, int col, char* pxs, int num_px) {
+    int start = (line * width + col) * get_pixel_size();
+
+    memcpy(bitmap + start, pxs, num_px * get_pixel_size());
 }
 
 int image::get_height() {
