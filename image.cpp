@@ -1,12 +1,14 @@
 // image.cpp
 
 #include <cstdlib>
+#include <stdio.h>
+#include <string.h>
 #include "image.h"
 
 using namespace std;
 
-image::image(int height, int width, int num_ch, size_t ch_size)
-: height(height), width(width), num_channels(num_ch), channel_size(ch_size) {
+image::image(int height, int width, int num_ch, size_t ch_size, unsigned char maxValue, char type)
+: height(height), width(width), num_channels(num_ch), channel_size(ch_size), maxValue(maxValue), type(type) {
     // 'allocate' the empty bitmap
     int bitmap_size = height * width * num_ch * ch_size;
     bitmap.reserve(bitmap_size);
@@ -17,32 +19,33 @@ image::image(int height, int width, int num_ch, size_t ch_size)
 
 image::~image() {
     // swap idiom to shed all contents and capacity
-    vector<char>().swap(bitmap);
+    vector<unsigned char>().swap(bitmap);
 }
 
-char* image::get_pixel(int line, int col) {
+unsigned char* image::get_pixel(int line, int col) {
     return get_pixels(line, col, 1);
 }
 
-void image::set_pixel(int line, int col, char* px) {
+void image::set_pixel(int line, int col, unsigned char* px) {
     // TODO : choose a safer alternative for pointer
     set_pixels(line, col, px, 1);
 }
 
-char* image::get_pixels(int line, int col, int num_px) {
+unsigned char* image::get_pixels(int line, int col, int num_px) {
     int start = (line * width + col) * get_pixel_size();
 
-    char* ret = (char *) calloc (num_px * get_pixel_size(), sizeof(char));
-    memcpy(ret, bitmap + start, num_px);
+    unsigned char* ret = (unsigned char *) calloc (num_px * get_pixel_size(), sizeof(unsigned char));
+    memcpy(ret, &bitmap + start, num_px);
 
     return ret;
 }
 
-void image::set_pixels(int line, int col, char* pxs, int num_px) {
+void image::set_pixels(int line, int col, unsigned char* pxs, int num_px) {
     int start = (line * width + col) * get_pixel_size();
 
-    memcpy(bitmap + start, pxs, num_px * get_pixel_size());
+    memcpy(&bitmap + start, pxs, num_px * get_pixel_size());
 }
+
 
 int image::get_height() {
     return height;
@@ -56,10 +59,22 @@ int image::get_num_channels() {
     return num_channels;
 }
 
+int image::get_bitmap_size() {
+    return height * width * num_channels * channel_size;
+}
+
 size_t image::get_channel_size() {
     return channel_size;
 }
 
 size_t image::get_pixel_size() {
     return num_channels * channel_size;
+}
+
+unsigned char image::get_max_value() {
+    return maxValue;
+}
+
+char image::get_type(){
+	return type;
 }
