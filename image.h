@@ -7,37 +7,45 @@
 
 using namespace std;
 
+/**
+    Implementation of an abstract image type
+*/
 class image {
 
+
 public:
-    image(int height, int width, int num_channels, size_t channel_size, unsigned char maxValue, char type);
+    image(int height, int width, int num_channels, size_t channel_size);
     ~image();
 
+    // setters and getters for a single pixel
     unsigned char* get_pixel(int line, int col);
     void set_pixel(int line, int col, unsigned char* px);
 
-    unsigned char* get_pixels(int line, int col, int num_px);
-    void set_pixels(int line, int col, unsigned char* pxs, int num_px);
+    // setters and getters for a number of pixels
+    // (more efficient than a pixel per operation for mass reading and writing)
+    unsigned char* get_pixels(int line, int col, unsigned long num_px);
+    void set_pixels(int line, int col, unsigned char* pxs, unsigned long num_px);
 
+    // getters for private internal values
     int get_height();
     int get_width();
     int get_num_channels();
     int get_bitmap_size();
     size_t get_channel_size();
     size_t get_pixel_size();
-    unsigned char get_max_value();
-    char get_type();
-    
-    unsigned char *pixels;
 
 private:
+    // container for the occupied memory
     vector<unsigned char> bitmap;
-    int height, width;
-    int num_channels;
-    size_t channel_size;
-    unsigned char maxValue;
-    char type;
 
+    // image dimensions
+    int height, width;
+
+    // number of color channels
+    int num_channels;
+
+    // dimension in memory of a color channel
+    size_t channel_size;
 };
 
 #endif
