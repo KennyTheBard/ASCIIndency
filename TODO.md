@@ -1,7 +1,6 @@
 ### TODO List
 
 # Developing
--
 - [ ] Filter appliance method
 - [ ] Free/Constant-ratio resizing method
 - [ ] Pixel to ASCII 1:1 transformation
