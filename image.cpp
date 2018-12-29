@@ -27,7 +27,6 @@ unsigned char* image::get_pixel(int line, int col) {
 }
 
 void image::set_pixel(int line, int col, unsigned char* px) {
-    // TODO : choose a safer alternative for pointer
     set_pixels(line, col, px, 1);
 }
 

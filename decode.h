@@ -25,8 +25,6 @@ size_t maxVal2size(unsigned long long maxVal) {
     Current Netpbm formats: PNM, PGM.
 */
 image* decode_netpbm(FILE *in) {
-    // TODO : Test it
-    // TODO : Implement the other Netpbm formats
     char type;
     int width, height;
     unsigned int maxVal;
