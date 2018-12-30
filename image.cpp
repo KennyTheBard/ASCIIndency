@@ -7,8 +7,8 @@
 
 using namespace std;
 
-image::image(int height, int width, int num_ch, size_t ch_size)
-: height(height), width(width), num_channels(num_ch), channel_size(ch_size) {
+image::image(int height, int width, int num_ch, size_t ch_size, bool big_end)
+: height(height), width(width), num_channels(num_ch), channel_size(ch_size), big_endian(big_end) {
     // 'allocate' the empty bitmap
     int bitmap_size = height * width * num_ch * ch_size;
     bitmap.reserve(bitmap_size);
@@ -64,6 +64,10 @@ int image::get_bitmap_size() {
 
 size_t image::get_channel_size() {
     return channel_size;
+}
+
+bool image::is_big_endian() {
+    return big_endian;
 }
 
 size_t image::get_pixel_size() {

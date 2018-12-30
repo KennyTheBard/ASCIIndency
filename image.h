@@ -14,7 +14,7 @@ class image {
 
 
 public:
-    image(int height, int width, int num_channels, size_t channel_size);
+    image(int height, int width, int num_channels, size_t channel_size, bool big_endian);
     ~image();
 
     // setters and getters for a single pixel
@@ -32,6 +32,7 @@ public:
     int get_num_channels();
     int get_bitmap_size();
     size_t get_channel_size();
+    bool is_big_endian();
     size_t get_pixel_size();
 
 private:
@@ -46,6 +47,9 @@ private:
 
     // dimension in memory of a color channel
     size_t channel_size;
+
+    // indicates the image's endianness
+    bool big_endian;
 };
 
 #endif

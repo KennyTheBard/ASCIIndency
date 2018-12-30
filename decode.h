@@ -32,7 +32,7 @@ image* decode_netpbm(FILE *in) {
     fscanf(in, "P%c %d %d %d ", &type, &width, &height, &maxVal);
 
     // instancing an image for either PNM or PGM format
-    image *img = new image(height, width, (type == '6' ? 3 : 1), maxVal2size((unsigned long long) maxVal));
+    image *img = new image(height, width, (type == '6' ? 3 : 1), maxVal2size((unsigned long long) maxVal), false);
 
     int pixels_per_line = img->get_pixel_size() * img->get_width();
     unsigned char *line = (unsigned char *) malloc (pixels_per_line);

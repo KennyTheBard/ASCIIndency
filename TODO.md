@@ -4,6 +4,7 @@
 - [ ] Filter appliance method
 - [ ] Free/Constant-ratio resizing method
 - [ ] Pixel to ASCII 1:1 transformation
+- [x] Grayscale
 
 # Implementing
 - [x] Implement Netpbm decoding for .pnm and .pgm
@@ -18,8 +19,10 @@
 - [ ] Find safer alternative to raw pointers in image setters/getters
 
 # Testing
-- [ ] Write unit test for Netpbm deconding
+- [ ] Write unit test for Netpbm decoding
 - [ ] Write more unit tests for image class
+- [ ] Test grayscale function
+- [ ] Test casting functions (from transformation.h)
 
 # Debugging
 - [ ] Problem with set_pixels in image (see image_ut)
